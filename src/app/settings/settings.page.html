@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <h1>Sugerencia</h1>
+    <form [formGroup]="emailForm" (ngSubmit)="sendSuggestion()">
+
+      <ion-item>
+        <div>
+          <h2>Nombre</h2>
+          <ion-input formControlName="nombre" placeholder="Introduce tu nombre"></ion-input>
+          <ion-label style="color: red; font-size: small;">*Opcional*</ion-label> 
+        </div>
+         
+        
+      </ion-item>
+      <ion-item>
+        <div>
+          <h2>Sugerencia</h2>
+          <ion-input type="textarea" formControlName="body" placeholder="Introduce tu sugerencia"></ion-input>
+        </div>
+      </ion-item>
+
+      <div style="text-align: center;">
+        <ion-button shape="round" type="submit" [disabled]="!this.emailForm.valid">Enviar</ion-button>
+      </div>
+    </form>
+  </ion-card>
+</ion-content>
