@@ -37,7 +37,7 @@ export class Screen1 {
      * Funcion generado por Apperyio
      */
     public __getMapping(_currentItem, property, defaultValue, isVariable?, isSelected?) {
-        return this.$aio_mappingHelper.getMapping(this.mappingData, _currentItem, property, defaultValue, isVariable, isSelected);
+        return this.mappingHelper.getMapping(this.mappingData, _currentItem, property, defaultValue, isVariable, isSelected);
     }
     /**
      * Funcion generado por Apperyio
@@ -45,16 +45,16 @@ export class Screen1 {
     public __setMapping(data: any = {}, keyName: string, propName?: string): void {
         const changes = data.detail || {};
         if (propName) {
-            this.mappingData = this.$aio_mappingHelper.updateData(this.mappingData, [keyName], changes[propName]);
+            this.mappingData = this.mappingHelper.updateData(this.mappingData, [keyName], changes[propName]);
         } else {
-            this.mappingData = this.$aio_mappingHelper.updateData(this.mappingData, [keyName], changes.value);
+            this.mappingData = this.mappingHelper.updateData(this.mappingData, [keyName], changes.value);
         }
     }
     //#endregion
 
     constructor( private launchNav:LaunchNavigator, private router:Router, private http:HttpClient, 
         private flashLight:Flashlight, private tts:TextToSpeech, private speech: SpeechRecognition, public Apperyio: ApperyioHelperService, 
-        private $aio_mappingHelper: ApperyioMappingHelperService, private changeDet: ChangeDetectorRef) {
+        private mappingHelper: ApperyioMappingHelperService, private changeDet: ChangeDetectorRef) {
         
         //#region Al iniciar la aplicación o se vuelve de settings
         this.speech.isRecognitionAvailable().then((available:boolean)=>{
@@ -153,6 +153,7 @@ export class Screen1 {
         let payload:Payload={
             action:''
         };
+        
         this.Apperyio.getService("getChatBotResponse_service").then(
             async (service) => {
                 if (!service) {
@@ -164,7 +165,7 @@ export class Screen1 {
                 let headers = {};
 
                 /* Mapping */
-                data =  this.$aio_mappingHelper.updateData(data, ["message"], this.$aio_mappingHelper.getSubdata(mymsg, []));
+                data =  this.mappingHelper.updateData(data, ["message"], this.mappingHelper.getSubdata(mymsg, []));
                 service.execute({
                     data: data,
                     params: params,
@@ -174,7 +175,7 @@ export class Screen1 {
                     async (res: any) => {
                         let mappingData: any = {};
                         /* Mapping */
-                        this.messages = this.$aio_mappingHelper.updateData(this.messages, [], ((value) => {
+                        this.messages = this.mappingHelper.updateData(this.messages, [], ((value) => {
                             let oldMessages = this.messages;
 
                             answer.text = value[0].text.text[0];
@@ -185,7 +186,7 @@ export class Screen1 {
                             }
 
                             return oldMessages;
-                        })(this.$aio_mappingHelper.getSubdata(res, ["queryResult", "fulfillmentMessages"])));
+                        })(this.mappingHelper.getSubdata(res, ["queryResult", "fulfillmentMessages"])));
                         this.mappingData = { ...this.mappingData,
                             ...mappingData
                         };

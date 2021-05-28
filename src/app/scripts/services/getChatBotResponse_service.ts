@@ -1,14 +1,9 @@
 /**
  * Module initializes rest service getChatBotResponse_service
  */
-import {
-    Injectable
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import _ from "lodash";
-import {
-    ApperyioRestService,
-    EntityApiService
-} from '../apperyio/apperyio';
+import { ApperyioRestService, EntityApiService } from '../apperyio/apperyio';
 /**
  * Api is a generic REST Api handler. Set your API url first.
  extends ApperyioService*/
@@ -21,6 +16,7 @@ class getChatBotResponse_service {
             }
         });
     }
+    
     constructor(private apperyioService: ApperyioRestService, private entityAPI: EntityApiService) {}
     execute(reqOpts ? : any) {
         /**

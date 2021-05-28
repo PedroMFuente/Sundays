@@ -10,6 +10,7 @@ import { EmailService } from '../services/email.service';
 export class SettingsPage implements OnInit {
 
   public emailForm:FormGroup;
+  public showExample:boolean =false;
   constructor(private form:FormBuilder, private emailS:EmailService) {
     this.emailForm = this.form.group({
       nombre:[],
@@ -30,4 +31,7 @@ export class SettingsPage implements OnInit {
     this.emailS.sendEmail(nombre, body).then(success=>console.log("success"), error=>console.log(error))
   }
 
+  switchShowExamples(){
+    this.showExample= !this.showExample;
+  }
 }

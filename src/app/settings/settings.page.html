@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Settings</ion-title>
+    <ion-title>Otros</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,5 +29,36 @@
         <ion-button shape="round" type="submit" [disabled]="!this.emailForm.valid">Enviar</ion-button>
       </div>
     </form>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item (click)="switchShowExamples()">
+        <ion-label>
+          <h1>Ejemplos</h1>
+          <p>Ejemplos de funciones:</p>
+        </ion-label>
+        <ion-icon *ngIf="showExample!==true"  style="text-align: end;" name="arrow-back"></ion-icon>
+        <ion-icon *ngIf="showExample===true" style="text-align: end;" name="arrow-down"></ion-icon>
+      </ion-item>
+
+      <div *ngIf="showExample">
+        <ion-row>
+          <ion-col>
+            <h4><b>Enciende la linterna</b> (activa la linterna del dispositivo)</h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h4><b>Llévame a </b> (Te guia hacia una localización)</h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h4><b>Qué es</b> (busca en el navegador predeterminado)</h4>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card-content>
   </ion-card>
 </ion-content>
